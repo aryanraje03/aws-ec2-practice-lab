@@ -1,7 +1,7 @@
 # ☁️ AWS EC2 Web Server Deployment Lab
 
 > **By Aryanraje Dhokale** — Cloud Enthusiast | Full Stack Developer | BTech CSE 2025  
-> 📧 aryanrajedhokale03@gmail.com | 📞 +91 89832 47120
+> 📧 aryanrajedhokale03@gmail.com 
 
 ---
 
