@@ -153,8 +153,8 @@ sudo systemctl restart nginx
 
 I'm **Aryanraje Dhokale**, a final-year BTech CSE student actively learning AWS and Cloud Computing. I have 4+ internship experiences in Java, React, Python, and Mobile Development.
 
-- 🔗 [GitHub](https://github.com/aryanraje)
-- 🔗 [LinkedIn](https://linkedin.com/in/aryanraje)
+- 🔗 [GitHub](https://github.com/aryanraje03)
+- 🔗 [LinkedIn](https://www.linkedin.com/in/aryanraje192003)
 - 📧 aryanrajedhokale03@gmail.com
 
 ---
