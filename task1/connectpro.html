@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ConnectPro - Professional Network</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--blue:#0077b5;--dblue:#004182;--light:#f3f2ef;--white:#fff;--text:#191919;--muted:#666}
+  body{font-family:'Inter',sans-serif;background:var(--light);color:var(--text);font-size:14px}
+  nav{background:#fff;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:100;padding:0 24px}
+  .nav-inner{max-width:1128px;margin:0 auto;display:flex;align-items:center;gap:12px;height:52px}
+  .logo{font-family:'Source Serif 4',serif;font-size:28px;color:var(--blue);font-weight:700;letter-spacing:-1px;flex-shrink:0}
+  .search-bar{display:flex;align-items:center;background:#eef3f8;border:1px solid transparent;border-radius:4px;padding:0 12px;height:34px;gap:8px;width:260px;transition:.2s}
+  .search-bar:focus-within{border-color:var(--blue);background:#fff}
+  .search-bar input{border:none;background:transparent;font-size:14px;width:100%;outline:none;color:var(--text)}
+  .nav-icons{display:flex;align-items:center;gap:4px;margin-left:auto}
+  .nav-icon{display:flex;flex-direction:column;align-items:center;gap:2px;padding:0 12px;height:52px;justify-content:center;cursor:pointer;text-decoration:none;color:#666;border-bottom:2px solid transparent;transition:.2s;font-size:11px}
+  .nav-icon:hover{color:var(--text)}
+  .nav-icon.active{color:var(--text);border-bottom-color:var(--text)}
+  .nav-icon span:first-child{font-size:20px}
+  .nav-btn{background:var(--blue);color:#fff;padding:6px 16px;border-radius:20px;border:none;cursor:pointer;font-size:14px;font-weight:500;transition:.2s}
+  .nav-btn:hover{background:var(--dblue)}
+  .nav-outline{background:transparent;border:1.5px solid var(--blue);color:var(--blue)}
+  .nav-outline:hover{background:#e8f4fa}
+  main{max-width:1128px;margin:24px auto;padding:0 20px;display:grid;grid-template-columns:225px 1fr 300px;gap:24px}
+  .sidebar-card{background:#fff;border:1px solid #ddd;border-radius:8px;overflow:hidden;margin-bottom:8px}
+  .profile-banner{height:56px;background:linear-gradient(135deg,var(--blue),#0095cc)}
+  .profile-avatar{width:72px;height:72px;border-radius:50%;border:3px solid #fff;margin:-36px auto 0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:24px;font-weight:700;font-family:'Source Serif 4',serif}
+  .profile-info{padding:8px 16px 16px;text-align:center}
+  .profile-info h3{font-size:16px;font-weight:600;margin-top:8px}
+  .profile-info p{font-size:12px;color:#666;margin-top:4px;line-height:1.4}
+  .profile-stat{display:flex;justify-content:space-between;padding:8px 16px;border-top:1px solid #eee;font-size:12px;cursor:pointer;transition:.2s}
+  .profile-stat:hover{background:#f5f5f5}
+  .profile-stat span:last-child{color:var(--blue);font-weight:600}
+  .sidebar-menu{list-style:none;padding:8px 0}
+  .sidebar-menu li a{display:flex;align-items:center;gap:10px;padding:8px 16px;text-decoration:none;color:var(--text);font-size:14px;transition:.2s}
+  .sidebar-menu li a:hover{background:#f5f5f5;color:var(--blue)}
+  .sidebar-menu li a span:first-child{font-size:18px}
+  .feed{display:flex;flex-direction:column;gap:8px}
+  .post-box{background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px}
+  .post-input{display:flex;align-items:center;gap:12px}
+  .mini-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ef4444);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;flex-shrink:0}
+  .post-input-btn{flex:1;height:44px;border:1.5px solid #999;border-radius:22px;background:transparent;padding:0 16px;text-align:left;cursor:pointer;color:#666;font-size:14px;font-family:'Inter',sans-serif;transition:.2s}
+  .post-input-btn:hover{border-color:var(--text);background:#f3f2ef}
+  .post-actions{display:flex;gap:4px;margin-top:8px;padding-top:8px}
+  .post-action{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:4px;cursor:pointer;color:#666;font-size:13px;font-weight:500;transition:.2s;flex:1;justify-content:center}
+  .post-action:hover{background:#f3f2ef;color:var(--text)}
+  .post-action span:first-child{font-size:18px}
+  .post-card{background:#fff;border:1px solid #ddd;border-radius:8px;overflow:hidden}
+  .post-header{display:flex;align-items:flex-start;gap:10px;padding:12px 16px}
+  .post-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;flex-shrink:0}
+  .post-meta h4{font-size:14px;font-weight:600;cursor:pointer}
+  .post-meta h4:hover{text-decoration:underline;color:var(--blue)}
+  .post-meta p{font-size:12px;color:#666;margin:2px 0}
+  .follow-btn{margin-left:auto;background:transparent;border:none;color:var(--blue);font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;white-space:nowrap}
+  .post-body{padding:0 16px 12px;font-size:14px;line-height:1.5;color:#333}
+  .post-body .hashtag{color:var(--blue);cursor:pointer}
+  .post-img-placeholder{height:260px;background:linear-gradient(135deg,#e8f4f9,#d0e9f5);display:flex;align-items:center;justify-content:center;font-size:80px;margin:8px 0}
+  .post-stats{padding:4px 16px 8px;display:flex;justify-content:space-between;font-size:12px;color:#666;border-bottom:1px solid #eee}
+  .post-footer-actions{display:flex;padding:4px}
+  .pf-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:4px;cursor:pointer;color:#666;font-size:13px;font-weight:500;transition:.2s}
+  .pf-btn:hover{background:#f3f2ef;color:var(--text)}
+  .pf-btn span:first-child{font-size:18px}
+  .right-panel{display:flex;flex-direction:column;gap:8px}
+  .news-card{background:#fff;border:1px solid #ddd;border-radius:8px;padding:16px}
+  .news-card h3{font-size:15px;font-weight:600;margin-bottom:12px}
+  .news-item{display:flex;gap:10px;margin-bottom:12px;cursor:pointer;align-items:flex-start}
+  .news-dot{width:8px;height:8px;border-radius:50%;background:#666;flex-shrink:0;margin-top:6px}
+  .news-text{font-size:13px;font-weight:500;color:var(--text);line-height:1.4}
+  .news-text span{display:block;font-size:12px;color:#888;font-weight:400;margin-top:2px}
+  .connect-card{background:#fff;border:1px solid #ddd;border-radius:8px;padding:16px}
+  .connect-card h3{font-size:15px;font-weight:600;margin-bottom:12px}
+  .connect-item{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f0f0f0}
+  .connect-item:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0}
+  .conn-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-shrink:0}
+  .conn-info{flex:1}
+  .conn-info p:first-child{font-size:13px;font-weight:500}
+  .conn-info p:last-child{font-size:12px;color:#888;margin-top:2px}
+  .conn-btn{border:1.5px solid var(--blue);background:transparent;color:var(--blue);padding:5px 16px;border-radius:16px;font-size:13px;font-weight:600;cursor:pointer;transition:.2s}
+  .conn-btn:hover{background:#e8f4fa}
+  .premium-card{background:linear-gradient(135deg,#f9f4ec,#fdf0d5);border:1px solid #e8d99a;border-radius:8px;padding:16px}
+  .premium-card h4{font-size:14px;font-weight:600;color:#7a5c00;margin-bottom:6px}
+  .premium-card p{font-size:12px;color:#8a6a10;line-height:1.5;margin-bottom:10px}
+  .premium-btn{background:#9c6d00;color:#fff;border:none;padding:8px 16px;border-radius:16px;font-size:13px;font-weight:600;cursor:pointer;width:100%;transition:.2s}
+  .premium-btn:hover{background:#7a5500}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">ConnectPro</div>
+    <div class="search-bar">
+      <span>🔍</span>
+      <input type="text" placeholder="Search">
+    </div>
+    <div class="nav-icons">
+      <a href="#" class="nav-icon active"><span>🏠</span><span>Home</span></a>
+      <a href="#" class="nav-icon"><span>👥</span><span>Network</span></a>
+      <a href="#" class="nav-icon"><span>💼</span><span>Jobs</span></a>
+      <a href="#" class="nav-icon"><span>💬</span><span>Messaging</span></a>
+      <a href="#" class="nav-icon"><span>🔔</span><span>Alerts</span></a>
+      <a href="#" class="nav-icon" style="border-left:1px solid #ddd;padding-left:20px"><span>👤</span><span>Me</span></a>
+      <button class="nav-btn nav-outline" style="margin-left:8px">Post a Job</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <!-- Left Sidebar -->
+  <aside>
+    <div class="sidebar-card">
+      <div class="profile-banner"></div>
+      <div style="text-align:center">
+        <div class="profile-avatar">RA</div>
+        <div class="profile-info">
+          <h3>Rahul Agarwal</h3>
+          <p>Software Engineer | AWS | Python | React</p>
+          <p style="color:#888;font-size:11px;margin-top:4px">Pune, Maharashtra</p>
+        </div>
+      </div>
+      <div class="profile-stat"><span>Profile viewers</span><span>142</span></div>
+      <div class="profile-stat"><span>Post impressions</span><span>1,489</span></div>
+      <div class="profile-stat"><span>Connections</span><span>387</span></div>
+    </div>
+    <div class="sidebar-card">
+      <ul class="sidebar-menu">
+        <li><a href="#"><span>📑</span> Saved items</a></li>
+        <li><a href="#"><span>👥</span> Groups</a></li>
+        <li><a href="#"><span>📅</span> Events</a></li>
+        <li><a href="#"><span>🗞</span> Newsletters</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Feed -->
+  <section class="feed">
+    <!-- Post Box -->
+    <div class="post-box">
+      <div class="post-input">
+        <div class="mini-avatar">RA</div>
+        <button class="post-input-btn">Start a post, try writing with AI</button>
+      </div>
+      <div class="post-actions">
+        <div class="post-action"><span>🖼</span><span>Media</span></div>
+        <div class="post-action"><span>📅</span><span>Event</span></div>
+        <div class="post-action"><span>✏️</span><span>Write article</span></div>
+      </div>
+    </div>
+
+    <!-- Post 1 -->
+    <div class="post-card">
+      <div class="post-header">
+        <div class="post-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)">PM</div>
+        <div class="post-meta">
+          <h4>Priya Mehta</h4>
+          <p>Senior Cloud Architect at Infosys | AWS Certified</p>
+          <p>2h • 🌐</p>
+        </div>
+        <button class="follow-btn">+ Follow</button>
+      </div>
+      <div class="post-body">
+        Excited to share that I've just completed my <strong>AWS Solutions Architect</strong> certification! 🎉<br><br>
+        The journey was intense but worth it. Key takeaways from my 3-month prep:<br>
+        ✅ EC2, VPC, IAM deep dives<br>
+        ✅ Focus on well-architected framework<br>
+        ✅ Practice with real-world scenarios<br><br>
+        To everyone preparing — stay consistent! Drop a comment if you want study tips.<br>
+        <span class="hashtag">#AWS</span> <span class="hashtag">#CloudComputing</span> <span class="hashtag">#Certification</span> <span class="hashtag">#CareerGrowth</span>
+      </div>
+      <div class="post-stats">
+        <span>👍❤️🎉 Aakash, Sneha and 284 others</span>
+        <span>42 comments · 18 reposts</span>
+      </div>
+      <div class="post-footer-actions">
+        <div class="pf-btn"><span>👍</span><span>Like</span></div>
+        <div class="pf-btn"><span>💬</span><span>Comment</span></div>
+        <div class="pf-btn"><span>🔁</span><span>Repost</span></div>
+        <div class="pf-btn"><span>📤</span><span>Send</span></div>
+      </div>
+    </div>
+
+    <!-- Post 2 with image -->
+    <div class="post-card">
+      <div class="post-header">
+        <div class="post-avatar" style="background:linear-gradient(135deg,#11998e,#38ef7d)">VK</div>
+        <div class="post-meta">
+          <h4>Vikram Kumar</h4>
+          <p>Full Stack Developer | React | Node.js | Docker</p>
+          <p>5h • 🌐</p>
+        </div>
+        <button class="follow-btn">+ Follow</button>
+      </div>
+      <div class="post-body">
+        🚀 Just deployed my first microservices architecture on AWS using ECS + Fargate!<br><br>
+        The performance improvement over our monolith is remarkable. 3x faster response times, 40% cost reduction.<br><br>
+        Here's a screenshot of the architecture diagram:
+      </div>
+      <div class="post-img-placeholder">🏗️</div>
+      <div class="post-body" style="padding-top:0">
+        <span class="hashtag">#Microservices</span> <span class="hashtag">#Docker</span> <span class="hashtag">#AWS</span> <span class="hashtag">#DevOps</span>
+      </div>
+      <div class="post-stats">
+        <span>👍🚀❤️ 512 reactions</span>
+        <span>67 comments · 34 reposts</span>
+      </div>
+      <div class="post-footer-actions">
+        <div class="pf-btn"><span>👍</span><span>Like</span></div>
+        <div class="pf-btn"><span>💬</span><span>Comment</span></div>
+        <div class="pf-btn"><span>🔁</span><span>Repost</span></div>
+        <div class="pf-btn"><span>📤</span><span>Send</span></div>
+      </div>
+    </div>
+
+    <!-- Post 3 - Job Post -->
+    <div class="post-card">
+      <div class="post-header">
+        <div class="post-avatar" style="background:#0077b5;font-size:22px">💼</div>
+        <div class="post-meta">
+          <h4>TechCorp India is hiring</h4>
+          <p>Promoted</p>
+        </div>
+      </div>
+      <div class="post-body">
+        <strong>Senior DevOps Engineer</strong> — Remote / Pune<br><br>
+        We're looking for a DevOps engineer with 3+ years of experience in AWS, Terraform, and CI/CD pipelines.<br><br>
+        💰 ₹18–28 LPA | 🏠 Remote-friendly | ✨ Great benefits
+      </div>
+      <div style="padding:0 16px 12px"><button class="nav-btn" style="padding:8px 20px">Easy Apply</button></div>
+    </div>
+  </section>
+
+  <!-- Right Panel -->
+  <aside class="right-panel">
+    <!-- News -->
+    <div class="news-card">
+      <h3>ConnectPro News</h3>
+      <div class="news-item"><div class="news-dot"></div><div class="news-text">India's tech sector adds 1.5L jobs in Q1 2025<span>2h ago · 4,200 readers</span></div></div>
+      <div class="news-item"><div class="news-dot"></div><div class="news-text">AWS re:Invent 2025 announcements wrap up<span>4h ago · 8,100 readers</span></div></div>
+      <div class="news-item"><div class="news-dot"></div><div class="news-text">Gen AI adoption accelerates in Indian startups<span>6h ago · 3,500 readers</span></div></div>
+      <div class="news-item"><div class="news-dot"></div><div class="news-text">Remote work policy updates at top IT firms<span>8h ago · 5,700 readers</span></div></div>
+    </div>
+
+    <!-- Connections -->
+    <div class="connect-card">
+      <h3>People you may know</h3>
+      <div class="connect-item">
+        <div class="conn-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">SK</div>
+        <div class="conn-info">
+          <p>Suresh Kumar</p>
+          <p>DevOps Engineer at AWS</p>
+        </div>
+        <button class="conn-btn">Connect</button>
+      </div>
+      <div class="connect-item">
+        <div class="conn-avatar" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)">NJ</div>
+        <div class="conn-info">
+          <p>Neha Joshi</p>
+          <p>Data Scientist at Google</p>
+        </div>
+        <button class="conn-btn">Connect</button>
+      </div>
+      <div class="connect-item">
+        <div class="conn-avatar" style="background:linear-gradient(135deg,#10b981,#3b82f6)">AR</div>
+        <div class="conn-info">
+          <p>Arjun Reddy</p>
+          <p>Frontend Dev at Flipkart</p>
+        </div>
+        <button class="conn-btn">Connect</button>
+      </div>
+    </div>
+
+    <!-- Premium -->
+    <div class="premium-card">
+      <h4>⭐ Upgrade to Premium</h4>
+      <p>Get access to premium features: InMail credits, who viewed your profile, and top applicant badge.</p>
+      <button class="premium-btn">Try Premium free</button>
+    </div>
+  </aside>
+</main>
+
+</body>
+</html>
