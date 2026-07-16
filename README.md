@@ -1,7 +1,6 @@
 # ☁️ AWS EC2 Web Server Deployment Lab
 
-> **By Aryanraje Dhokale** — Cloud Enthusiast | Full Stack Developer | BTech CSE 2025  
-> 📧 aryanrajedhokale03@gmail.com 
+> **By Aryanraje Dhokale** — Cloud Enthusiast
 
 ---
 
@@ -159,4 +158,4 @@ I'm **Aryanraje Dhokale**, a final-year BTech CSE student actively learning AWS 
 
 ---
 
-*Built with hands-on practice on AWS Free Tier — 2025*
+*Built with hands-on practice on AWS Free Tier — 2026*
